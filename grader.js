@@ -26,8 +26,8 @@ var program = require('commander');
 var cheerio = require('cheerio');
 var HTMLFILE_DEFAULT = "index.html";
 var CHECKSFILE_DEFAULT = "checks.json";
-var DAULT_URL = null;
-var rest = require('./restler');
+var DEFAULT_URL = null;
+var rest = require('restler');
 var sys = require('util');
 
 var assertFileExists = function(infile) {
@@ -83,10 +83,10 @@ if(require.main == module) {
         .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
         .option('-u, --url <url>', 'Path to url', DEFAULT_URL)
         .parse(process.argv);
-    if(program.url){
-	var $ = cheerioURL(program.url);
+    if (program.url) {
+        var $ = cheerioURL(program.url);
     } else {
-	var $ = cheerioHtmlFile(program.file);
+        var $ = cheerioHtmlFile(program.file);
     }
     var checkJson = checkHtmlFile(program.file, program.checks);
     var outJson = JSON.stringify(checkJson, null, 4);
